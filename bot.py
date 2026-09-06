@@ -57,4 +57,5 @@ async def verify(interaction: discord.Interaction, student_id: str):
     await interaction.user.add_roles(role)
     await interaction.edit_original_response(content=f"Student ID {student_id} verified (User: {sender_discord_id})")
 
+
 bot.run(DISCORD_TOKEN)

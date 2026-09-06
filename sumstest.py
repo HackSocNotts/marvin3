@@ -1,8 +1,9 @@
 from sums_api.client import SumsClient
 
 sc = SumsClient()
-sc.auth()
+members = sc.extract_members()
 
-input("close")
+for member in members:
+	print(member)
 
 sc.driver.quit()
