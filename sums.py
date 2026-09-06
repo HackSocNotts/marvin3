@@ -1,0 +1,1 @@
+from config import SUMS_USERNAME, SUMS_PASSWORD
