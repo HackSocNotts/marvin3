@@ -1,6 +1,6 @@
 services:
   app:
-    build: .
+    image: ghcr.io/hacksocnotts/marvin3:latest
     env_file:
       - .env
     environment:
