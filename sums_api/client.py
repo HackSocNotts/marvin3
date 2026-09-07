@@ -1,4 +1,4 @@
-from config import SUMS_USERNAME, SUMS_PASSWORD, SUMS_GROUP_ID
+from config import SELENIUM_URL, SUMS_USERNAME, SUMS_PASSWORD, SUMS_GROUP_ID
 
 from selenium import webdriver
 from selenium.webdriver.common.by import By
@@ -12,7 +12,15 @@ from sums_api.member import Member
 
 class SumsClient:
 	def __init__(self):
-		self.driver = webdriver.Chrome()
+		options = webdriver.ChromeOptions()
+		options.add_argument("--headless")
+		options.add_argument("--no-sandbox")
+		options.add_argument("--disable-dev-shm-usage")
+
+		self.driver = webdriver.Remote(
+			command_executor=SELENIUM_URL,
+			options=options,
+		)
 		self.wait = WebDriverWait(self.driver, 10)
 
 	def navigate_to_idp_login(self):
