@@ -1,0 +1,28 @@
+services:
+  app:
+    build: .
+    env_file:
+      - .env
+    environment:
+      SELENIUM_URL: http://selenium:4444
+    volumes:
+      - ./data:/app/data
+    depends_on:
+      selenium:
+        condition: service_healthy
+
+  selenium:
+    image: selenium/standalone-chrome:4.47.0-20260808
+    shm_size: 2gb
+    environment:
+      - SE_START_VNC=false
+    healthcheck:
+      test:
+        - CMD
+        - curl
+        - -f
+        - http://localhost:4444/status
+      interval: 5s
+      timeout: 5s
+      retries: 20
+      start_period: 10s

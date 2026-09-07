@@ -9,13 +9,12 @@ from datetime import date
 
 from sums_api.member import Member
 
-
 class SumsClient:
 	def __init__(self):
 		options = webdriver.ChromeOptions()
 		options.add_argument("--headless")
-		options.add_argument("--no-sandbox")
-		options.add_argument("--disable-dev-shm-usage")
+		#options.add_argument("--no-sandbox")
+		#options.add_argument("--disable-dev-shm-usage")
 
 		self.driver = webdriver.Remote(
 			command_executor=SELENIUM_URL,
@@ -140,7 +139,9 @@ class SumsClient:
 			members.append(
 				Member(
 					student_id=cells[0].text.strip(),
-					join_date=date.fromisoformat(cells[4].text.strip()),
+					join_date=date.fromisoformat(
+						cells[4].get_attribute("textContent").strip()
+					),
 				)
 			)
 
